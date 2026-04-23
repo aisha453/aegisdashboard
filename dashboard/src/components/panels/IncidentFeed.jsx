@@ -6,7 +6,7 @@ import { useApp } from "../../context/AppContext";
 const CRISIS_TYPE_COLORS = {
   FIRE: "#ff4d4f",
   MEDICAL: "#4cd964",
-  THREAT: "#101010",
+  THREAT: "#39465a",
   UNKNOWN: "#ffd60a",
 };
 
@@ -242,7 +242,7 @@ const IncidentFeed = () => {
               padding: "6px 8px",
               borderRadius: "6px",
               border: "1px solid var(--border)",
-              background: soundEnabled ? "#173120" : "transparent",
+              background: soundEnabled ? "var(--success-soft)" : "transparent",
               color: "var(--text)",
               cursor: "pointer",
               fontSize: "12px",
@@ -285,7 +285,7 @@ const IncidentFeed = () => {
                   : "1px solid var(--border)",
                 borderLeft: `5px solid ${typeColor}`,
                 padding: "12px",
-                background: isSelected ? "#1b2230" : "#131923",
+                background: isSelected ? "var(--surface-tint)" : "var(--surface)",
                 opacity: isResolved ? 0.72 : 1,
               }}
             >
@@ -313,7 +313,7 @@ const IncidentFeed = () => {
                       borderRadius: "999px",
                       background: typeColor,
                       display: "inline-block",
-                      border: typeLabel === "THREAT" ? "1px solid #333" : "none",
+                      border: typeLabel === "THREAT" ? "1px solid var(--border-strong)" : "none",
                     }}
                   />
                   <span>{typeLabel}</span>
@@ -374,8 +374,8 @@ const IncidentFeed = () => {
                     padding: "6px 10px",
                     borderRadius: "6px",
                     border: "1px solid var(--success)",
-                    background: isResolved ? "#2b2f36" : "var(--success)",
-                    color: isResolved ? "#8f98a5" : "#08100a",
+                    background: isResolved ? "var(--surface-strong)" : "var(--success)",
+                    color: isResolved ? "var(--muted)" : "#08100a",
                     cursor: isResolved ? "not-allowed" : "pointer",
                     fontWeight: "bold",
                   }}

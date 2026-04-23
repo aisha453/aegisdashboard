@@ -1,7 +1,8 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { initialIncidents } from "../data/mockData";
 
 const AppContext = createContext();
+const THEME_STORAGE_KEY = "aegis-theme";
 
 const MAX_LOG_ENTRIES = 40;
 
@@ -30,7 +31,23 @@ const makeLog = (message, level = "info") => ({
 
 const seedIncidents = initialIncidents.map(normalizeIncident);
 
+const getInitialTheme = () => {
+  if (typeof window === "undefined") {
+    return "light";
+  }
+
+  const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+  if (storedTheme === "light" || storedTheme === "dark") {
+    return storedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
 export const AppProvider = ({ children }) => {
+  const [theme, setTheme] = useState(getInitialTheme);
   const [incidents, setIncidents] = useState(seedIncidents);
   const [selectedIncident, setSelectedIncident] = useState(
     seedIncidents[0] || null,
@@ -38,6 +55,12 @@ export const AppProvider = ({ children }) => {
   const [executionLog, setExecutionLog] = useState([
     makeLog("System online. Monitoring incidents."),
   ]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
 
   const appendLog = (message, level = "info") => {
     const log = makeLog(message, level);
@@ -97,9 +120,15 @@ export const AppProvider = ({ children }) => {
     setIncidentStatus(incidentId, "RESOLVED");
   };
 
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   return (
     <AppContext.Provider
       value={{
+        theme,
+        toggleTheme,
         incidents,
         selectedIncident,
         setSelectedIncident,

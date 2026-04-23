@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Html, OrbitControls, useGLTF } from "@react-three/drei";
 import { Box3, Color, Vector3 } from "three";
+import { useApp } from "../../context/AppContext";
 
 const RISK_COLORS = {
   HIGH: "#ff5a5a",
@@ -174,17 +175,22 @@ const PatientModel = ({
   showLabels = false,
   height = 380,
 }) => {
+  const { theme } = useApp();
   const canvasHeight = typeof height === "number" ? `${height}px` : height;
+  const canvasBackground = theme === "dark" ? "#050b14" : "#eef5ff";
+  const pointLightColor = theme === "dark" ? "#9cc4ff" : "#8ab8ff";
+  const ambientIntensity = theme === "dark" ? 0.78 : 1.05;
+  const directionalIntensity = theme === "dark" ? 1.05 : 1.2;
 
   return (
     <Canvas
       camera={{ position: [0, 0.05, 4.2], fov: 30 }}
       style={{ height: canvasHeight, width: "100%" }}
     >
-      <color attach="background" args={["#050b14"]} />
-      <ambientLight intensity={0.78} />
-      <directionalLight position={[2.2, 3, 2.2]} intensity={1.05} />
-      <pointLight position={[-2, 1.8, 1.8]} intensity={0.6} color="#9cc4ff" />
+      <color attach="background" args={[canvasBackground]} />
+      <ambientLight intensity={ambientIntensity} />
+      <directionalLight position={[2.2, 3, 2.2]} intensity={directionalIntensity} />
+      <pointLight position={[-2, 1.8, 1.8]} intensity={0.75} color={pointLightColor} />
 
       <BodyModel
         risk={risk}

@@ -41,7 +41,9 @@ const getConfidenceBinIndex = (confidence) => {
 };
 
 const AIInsights = () => {
-  const { incidents, selectedIncident } = useApp();
+  const { incidents, selectedIncident, theme } = useApp();
+  const chartTickColor = theme === "dark" ? "#9aa4b2" : "#5f7187";
+  const chartGridColor = theme === "dark" ? "#1f2632" : "#dbe5f0";
 
   const analytics = useMemo(() => {
     const typeCounts = incidents.reduce((accumulator, incident) => {
@@ -92,7 +94,7 @@ const AIInsights = () => {
         {
           label: "Count",
           data,
-          backgroundColor: ["#ff4d4f", "#4cd964", "#101010", "#ffd60a", "#4da3ff"],
+          backgroundColor: ["#ff4d4f", "#4cd964", "#5f7187", "#ffd60a", "#4da3ff"],
           borderRadius: 6,
           maxBarThickness: 24,
         },
@@ -152,10 +154,10 @@ const AIInsights = () => {
       legend: { display: false },
     },
     scales: {
-      x: { ticks: { color: "#9aa4b2" }, grid: { color: "#1f2632" } },
+      x: { ticks: { color: chartTickColor }, grid: { color: chartGridColor } },
       y: {
-        ticks: { color: "#9aa4b2", precision: 0 },
-        grid: { color: "#1f2632" },
+        ticks: { color: chartTickColor, precision: 0 },
+        grid: { color: chartGridColor },
         beginAtZero: true,
       },
     },
@@ -244,13 +246,13 @@ const AIInsights = () => {
                     legend: { display: false },
                   },
                   scales: {
-                    x: { ticks: { color: "#9aa4b2" }, grid: { color: "#1f2632" } },
+                    x: { ticks: { color: chartTickColor }, grid: { color: chartGridColor } },
                     y: {
                       ticks: {
-                        color: "#9aa4b2",
+                        color: chartTickColor,
                         callback: (value) => `${value}%`,
                       },
-                      grid: { color: "#1f2632" },
+                      grid: { color: chartGridColor },
                       beginAtZero: true,
                       max: 100,
                     },

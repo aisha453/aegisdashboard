@@ -21,7 +21,7 @@ const AlertsFeed = () => {
               padding: "10px",
               borderRadius: "8px",
               border: "1px solid var(--border)",
-              background: "#23191b",
+              background: "var(--alert-surface)",
               color: "var(--text)",
               textAlign: "left",
               cursor: "pointer",

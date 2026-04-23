@@ -106,8 +106,8 @@ const DigitalTwin = () => {
     selectedIncident.status === "RESOLVED"
       ? "LOW"
       : isHigh
-      ? "HIGH"
-      : "MEDIUM";
+        ? "HIGH"
+        : "MEDIUM";
 
   const twinState =
     selectedIncident.status === "RESOLVED" ? "STABLE" : "TRACKING";
@@ -152,7 +152,7 @@ const DigitalTwin = () => {
             border: "1px solid var(--border)",
             borderRadius: "10px",
             overflow: "hidden",
-            background: "#0c1016",
+            background: "var(--model-panel-bg)",
             minHeight: isFullscreen ? "100vh" : "380px",
             position: "relative",
           }}
@@ -175,7 +175,7 @@ const DigitalTwin = () => {
               height: "34px",
               borderRadius: "6px",
               border: "1px solid var(--border)",
-              background: "rgba(9,14,22,0.78)",
+              background: "var(--model-overlay)",
               color: "var(--text)",
               cursor: "pointer",
               fontSize: "16px",
@@ -193,7 +193,7 @@ const DigitalTwin = () => {
             border: "1px solid var(--border)",
             borderRadius: "8px",
             padding: "10px",
-            background: "#111720",
+            background: "var(--surface)",
           }}
         >
           <div style={{ fontSize: "13px", marginBottom: "6px" }}>
@@ -228,10 +228,10 @@ const DigitalTwin = () => {
                 marginTop: "8px",
                 fontSize: "11px",
                 color: "#55c7ff",
-                border: "1px solid rgba(85,199,255,0.45)",
+                border: "1px solid var(--info-border)",
                 borderRadius: "6px",
                 padding: "6px",
-                background: "rgba(85,199,255,0.08)",
+                background: "var(--info-soft)",
               }}
             >
               Oxygen drop detected. Monitor airway and response timeline.
@@ -244,7 +244,7 @@ const DigitalTwin = () => {
             border: "1px dashed var(--border)",
             borderRadius: "8px",
             padding: "10px",
-            background: "#10141c",
+            background: "var(--surface-strong)",
           }}
         >
           <div style={{ fontSize: "13px", marginBottom: "4px" }}>

@@ -5,10 +5,10 @@ const StatusBadge = ({ status }) => {
     LOW: "var(--success)",
     ACTIVE: "var(--accent)",
     IN_PROGRESS: "#ffd166",
-    RESOLVED: "#6ddc8a",
+    RESOLVED: "#8ad7a6",
   };
 
-  const textColor = status === "ACTIVE" ? "#fff" : "#000";
+  const textColor = status === "ACTIVE" ? "#fff" : "#142033";
 
   return (
     <span

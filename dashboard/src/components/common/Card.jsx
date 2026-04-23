@@ -7,6 +7,7 @@ const Card = ({ title, children }) => {
         borderRadius: "var(--radius)",
         padding: "16px",
         height: "100%",
+        boxShadow: "var(--shadow)",
       }}
     >
       {title && (
